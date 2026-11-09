@@ -1,0 +1,1 @@
+Esta pasta possui os arquivos que foram usados no vídeo [Crie um agente de IA local em 16 minutos]](https://youtu.be/urJfNeR7P78) que estão disponíveis no [drive](https://drive.google.com/drive/folders/1-oThSTIK68cAlaCqNmIWlRjy20YgWTjM).
