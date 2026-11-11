@@ -41,11 +41,10 @@ def separar_em_blocos(texto_pdf):
 lista_blocos = separar_em_blocos(texto_pdf)
 # print(len(lista_blocos))
 # print(lista_blocos[0])
-# print(lista_blocos[1])
-
+# print(lista_blocos[1])8
 # Embedding
 def criar_banco_vetores(lista_blocos):
-    ferramenta_embedding = OllamaEmbeddings(model="qwen3-embedding:0.6b")
+    ferramenta_embedding = OllamaEmbeddings(model="qwen3-embedding:8b")
     banco_vetores = FAISS.from_documents(lista_blocos, ferramenta_embedding)
     return banco_vetores
 
