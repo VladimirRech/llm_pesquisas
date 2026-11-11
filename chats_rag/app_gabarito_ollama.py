@@ -21,6 +21,7 @@ from langchain_core.output_parsers import StrOutputParser
 
 
 load_dotenv()
+st.set_page_config(page_title="Assistente RAG — Políticas Internas - carregando...", page_icon=":robot_face:")
 
 # logica do contexto do RAG
 def carregar_pdf(): # ler o pdf e extrair o texto do pdf
@@ -28,6 +29,7 @@ def carregar_pdf(): # ler o pdf e extrair o texto do pdf
     texto = pdf_loader.load()
     return texto
 
+print('Carregando PDF...')
 texto_pdf = carregar_pdf()
 
 def separar_em_blocos(texto_pdf):
@@ -38,16 +40,19 @@ def separar_em_blocos(texto_pdf):
     return lista_blocos
 
 # print(texto_pdf)
+print('Separando em blocos...')
 lista_blocos = separar_em_blocos(texto_pdf)
 # print(len(lista_blocos))
 # print(lista_blocos[0])
 # print(lista_blocos[1])8
+
 # Embedding
 def criar_banco_vetores(lista_blocos):
     ferramenta_embedding = OllamaEmbeddings(model="qwen3-embedding:8b")
     banco_vetores = FAISS.from_documents(lista_blocos, ferramenta_embedding)
     return banco_vetores
 
+print('Criando banco de vetores...')
 banco_vetores = criar_banco_vetores(lista_blocos)
 
 # logica do agente de IA
