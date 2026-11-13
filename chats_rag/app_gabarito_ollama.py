@@ -46,9 +46,9 @@ lista_blocos = separar_em_blocos(texto_pdf)
 # print(lista_blocos[0])
 # print(lista_blocos[1])8
 
-# Embedding
+# Embeddingst
 def criar_banco_vetores(lista_blocos):
-    ferramenta_embedding = OllamaEmbeddings(model="qwen3-embedding:8b")
+    ferramenta_embedding = OllamaEmbeddings(model="qwen3-embedding:0.6b")
     banco_vetores = FAISS.from_documents(lista_blocos, ferramenta_embedding)
     return banco_vetores
 
@@ -81,16 +81,12 @@ def criar_chain_agente(banco_vetores):
     
     return chain
 
-
-
-
 # interface
 
 st.title("Assistente RAG — Políticas Internas")
 
 # carregar chain e vector store
 chain = criar_chain_agente(banco_vetores)
-
 
 # inicia a lista de mensagens
 if "messages" not in st.session_state:
