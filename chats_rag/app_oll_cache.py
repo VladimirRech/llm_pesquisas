@@ -19,19 +19,21 @@ from langchain_ollama import OllamaEmbeddings, ChatOllama
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
+from datetime import datetime
 
 
 load_dotenv()
 st.set_page_config(page_title="Assistente RAG — Políticas Internas - carregando...", page_icon=":robot_face:")
 
-@st.cache_resource
+@st.cache_resource(scope="session", show_spinner=False)
 def carregar_banco_vetores():
-    print("Carregando banco de vetores...")
+    print(f"Carregando banco de vetores... {datetime.now()}")
     texto_pdf = PyPDFLoader("politica_rh.pdf").load()
     separador = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
     blocos = separador.split_documents(texto_pdf)
     embeddings = OllamaEmbeddings(model="qwen3-embedding:0.6b")
     banco_vetores = FAISS.from_documents(blocos, embeddings)
+    print(f"Banco de vetores carregado... {datetime.now()}")
     return banco_vetores
 
 banco_vetores = carregar_banco_vetores()
